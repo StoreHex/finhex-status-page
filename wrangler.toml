@@ -1,7 +1,7 @@
 name = "cf-workers-status-page-v2"
 main = "index.js"
-workers_dev = true
-compatibility_date = "2021-07-23"
+workers_dev = false
+compatibility_date = "2026-06-14"
 
 kv_namespaces = [
   { binding = "KV_STATUS_PAGE", id = "eac7c66a0f77404181947b17bbc2621c" }
@@ -12,3 +12,6 @@ bucket = "out"
 
 [triggers]
 crons = ["* * * * *"]
+
+[observability.logs]
+enabled = true
