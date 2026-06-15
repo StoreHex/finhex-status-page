@@ -7,8 +7,8 @@
   "private": true,
   "scripts": {
     "dev": "flareact dev",
-    "build": "bun run css && NODE_OPTIONS=--openssl-legacy-provider flareact build",
-     "deploy": "bun add wrangler@2 && bun run build && NODE_OPTIONS=--openssl-legacy-provider flareact publish",
+   "build": "bun run css && NODE_OPTIONS=--openssl-legacy-provider flareact build",
+  "deploy": "bun remove wrangler && bun add @cloudflare/wrangler && bun run build && NODE_OPTIONS=--openssl-legacy-provider flareact publish",
     "kv-gc": "node ./src/cli/gcMonitors.js",
     "format": "prettier --write '**/*.{js,css,json,md}'",
     "css": "postcss public/tailwind.css -o public/style.css"
