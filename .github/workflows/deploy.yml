@@ -34,10 +34,6 @@ jobs:
             out/
             index.js
             wrangler.toml
-            config.yaml
-            config.json
-            config.jsonl
-            package.json
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,7 +45,15 @@ jobs:
         with:
           name: built-worker
 
-      - name: Deploy
-        uses: cloudflare/wrangler-action@v3
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          node-version: '18'
+
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      - name: Deploy
+        run: wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
