@@ -3,6 +3,10 @@ main = "index.js"
 workers_dev = true
 compatibility_date = "2021-07-23"
 
+kv_namespaces = [
+  { binding = "KV_STATUS_PAGE", id = "eac7c66a0f77404181947b17bbc2621c" }
+]
+
 [site]
 bucket = "out"
 
