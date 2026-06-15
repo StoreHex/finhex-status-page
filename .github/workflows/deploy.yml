@@ -6,13 +6,13 @@ on:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    name: Deploy
+    name: Build
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js 14 (for flareact build)
+      - name: Setup Node.js 14
         uses: actions/setup-node@v4
         with:
           node-version: '14'
@@ -26,10 +26,28 @@ jobs:
       - name: Build
         run: npx flareact build
 
-      - name: Setup Node.js 18 (for Wrangler)
-        uses: actions/setup-node@v4
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
         with:
-          node-version: '18'
+          name: built-worker
+          path: |
+            out/
+            index.js
+            wrangler.toml
+            config.yaml
+            config.json
+            config.jsonl
+            package.json
+
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    needs: build
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: built-worker
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
