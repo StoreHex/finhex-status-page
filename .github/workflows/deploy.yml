@@ -6,9 +6,9 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    name: Build
+    name: Build and Deploy
     steps:
       - uses: actions/checkout@v4
 
@@ -25,25 +25,6 @@ jobs:
 
       - name: Build
         run: npx flareact build
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: built-worker
-          path: |
-            out/
-            index.js
-            wrangler.toml
-
-  deploy:
-    runs-on: ubuntu-latest
-    name: Deploy
-    needs: build
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: built-worker
 
       - name: Setup Node.js 18
         uses: actions/setup-node@v4
