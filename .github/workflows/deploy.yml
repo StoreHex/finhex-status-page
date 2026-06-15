@@ -24,7 +24,7 @@ jobs:
         run: npm run css
 
       - name: Build
-        run: NODE_OPTIONS=--openssl-legacy-provider npx flareact build
+        run: npx flareact build
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
