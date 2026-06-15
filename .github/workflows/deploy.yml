@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     name: Build
     steps:
       - uses: actions/checkout@v4
@@ -40,7 +40,7 @@ jobs:
             package.json
 
   deploy:
-    runs-on: self-hosted
+    runs-on: ubunutu-latest
     name: Deploy
     needs: build
     steps:
